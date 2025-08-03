@@ -178,9 +178,12 @@ void packet_handler(u_char *args, const struct pcap_pkthdr *pkthdr, const u_char
 }
 
 //요약파일 생성
-void write_report(struct tcp_session *session, FILE *report_file) {
+void write_report(struct tcp_session *session) {
+    FILE *report_file;
     
+    report_file = fopen("report.txt","a");
     if (report_file == NULL){
+        perror("파일 열기 실패");
         return;
     }
 
@@ -202,45 +205,42 @@ int main() {
     char errbuf[PCAP_ERRBUF_SIZE];
     char *dev = "en0"; //맥북 와이파이 인터페이스
 
-    FILE *fp = fopen("livecapture_report.txt", "w");
-    if (fp == NULL){
-        perror("리포트 파일 생성 불가");
-        return(1);
+    FILE *fp = fopen("report.txt", "w");
+    if (fp != NULL){
+        fclose(fp);
     }
 
     handle = pcap_open_live(dev, 65536, 1, 1000, errbuf);
     if (handle == NULL){
         fprintf(stderr, "장치 열기 실패 %s: %s\n", dev, errbuf);
-        fclose(fp);
         return(2);
     }
 
     printf("%s 장치에서 실시간 패킷 캡쳐 시작\n", dev);
-    pcap_loop(handle, 100, packet_handler, NULL); //-1은 무한캡쳐, 종료가 안돼서 횟수설정함
+    pcap_loop(handle, 1000, packet_handler, NULL); //-1은 무한캡쳐, 종료가 안돼서 횟수설정함
     pcap_close(handle);
 
-    printf("리포트를 livecapture_report.txt파일에 저장합니다.\n");
+    printf("리포트를 report.txt파일에 저장합니다.\n");
     struct tcp_session *current = session_list_head;
     struct tcp_session *next_session;
     while (current != NULL){
-        write_report(current, fp);
+        write_report(current);
         next_session = current->next;
         free(current);
         current = next_session;
     }
-    fclose(fp);
 
     return(0);
 }
-
-/*//오프라인 pcap파일 불러오기
+/*
+//오프라인 pcap파일 불러오기
 int main() {
     pcap_t *handle;
     char errbuf[PCAP_ERRBUF_SIZE];
     char *filename = "test1.pcap"; 
 
     // 프로그램 시작 시 리포트 파일 초기화
-    FILE *fp = fopen("offlinefile_report.txt", "w");
+    FILE *fp = fopen("report.txt", "w");
     if (fp != NULL) {
         fclose(fp);
     }
@@ -255,7 +255,7 @@ int main() {
     pcap_loop(handle, 0, packet_handler, NULL);
     pcap_close(handle);
 
-    printf("리포트를 offlinefile_report.txt 파일에 저장합니다.\n");
+    printf("리포트를 report.txt 파일에 저장합니다.\n");
     struct tcp_session *current = session_list_head;
     struct tcp_session *next_session;
     while (current != NULL) {
