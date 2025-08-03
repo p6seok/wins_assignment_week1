@@ -84,6 +84,12 @@ void packet_handler(u_char *args, const struct pcap_pkthdr *pkthdr, const u_char
     struct tcphdr *tcp_header = (struct tcphdr *)(packet + 14 + ip_header_length);
     int tcp_header_length = tcp_header->th_off*4;
 
+    //inet_ntoa값 복사해두기
+    char src_ip_buf[16];
+    char dst_ip_buf[16];
+    strcpy(src_ip_buf, inet_ntoa(ip_header->ip_src));
+    strcpy(dst_ip_buf, inet_ntoa(ip_header->ip_dst));
+
     //패킷 헤더에서 IP주소랑 포트번호 추출 및 변환
     char *src_ip_str = inet_ntoa(ip_header->ip_src);
     char *dst_ip_str = inet_ntoa(ip_header->ip_dst);
@@ -91,7 +97,7 @@ void packet_handler(u_char *args, const struct pcap_pkthdr *pkthdr, const u_char
     unsigned short dst_port = ntohs(tcp_header->th_dport);
 
     //추출한 정보로 추출된 패킷이 속한 세션을 찾거나 새로 생성
-    struct tcp_session *session = find_or_create_session(src_ip_str, src_port, dst_ip_str, dst_port);
+    struct tcp_session *session = find_or_create_session(src_ip_buf, src_port, dst_ip_buf, dst_port);
     
     //세션 통계 정보 업데이트
     session->total_packets++;
@@ -102,17 +108,17 @@ void packet_handler(u_char *args, const struct pcap_pkthdr *pkthdr, const u_char
     if((tcp_header->th_flags & TH_SYN) && !(tcp_header->th_flags & TH_ACK)){
         //최초 SYN이면
         if (session->handshake_state == 0){
-        session->syn_time = pkthdr->ts;
-        session->handshake_state = 1; // SYN 받음
+            printf("DEBUG: SYN packet found for session %s:%u\n", src_ip_buf, src_port); // 디버깅 라인 추가
+            session->syn_time = pkthdr->ts;
+            session->handshake_state = 1; // SYN 받음
         }
     }
 
     //SYNACK 패킷 (server->client)
     else if ((tcp_header->th_flags & TH_SYN) && (tcp_header->th_flags & TH_ACK)){
-
         if(session->handshake_state == 1){
-            long rtt_us = (pkthdr->ts.tv_sec - session->syn_time.tv_sec) * 1000000 +
-                          (pkthdr->ts.tv_usec - session->syn_time.tv_usec);
+            printf("DEBUG: SYN/ACK packet found for session %s:%u. Calculating RTT...\n", src_ip_buf, src_port); // 디버깅 라인 추가
+            long rtt_us = (pkthdr->ts.tv_sec - session->syn_time.tv_sec) * 1000000 + (pkthdr->ts.tv_usec - session->syn_time.tv_usec);
 
             session->avg_rtt = (double)rtt_us /1000.0;
 
@@ -163,13 +169,12 @@ void packet_handler(u_char *args, const struct pcap_pkthdr *pkthdr, const u_char
     if(time_diff_us >=1000000){
         double throughput_kbps = (double)session->bytes_in_interval * 8 / (time_diff_us / 1000000.0) / 1000.0;
 
-        printf(">>>>처리율 %s:%u: %.2f kbps\n", session->src_ip_str, session->src_port, throughput_kbps);
+        printf(">>>> 처리율 %s:%u: %.2f kbps\n", session->src_ip_str, session->src_port, throughput_kbps);
 
         session->throughput_start_time = pkthdr->ts;
         session->bytes_in_interval = 0;
     }
     
-
 }
 
 //요약파일 생성
@@ -187,7 +192,7 @@ void write_report(struct tcp_session *session) {
         session->src_ip_str, session->src_port, session->dst_ip_str, session->dst_port);
     fprintf(report_file, "Total Packets: %d\n", session->total_packets);
     fprintf(report_file, "Data Transferred: %.2f MB\n", (double)session->data_transferred / (1024.0 * 1024.0));
-    fprintf(report_file, "Avg RTT: %.2f ms\n", session->avg_rtt);
+    fprintf(report_file, "Avg RTT: %.4f ms\n", session->avg_rtt);
     fprintf(report_file, "Retransmissions: %d\n", session->retransmissions);
     fprintf(report_file, "===========================\n\n");
 
@@ -198,7 +203,7 @@ void write_report(struct tcp_session *session) {
 int main() {
     pcap_t *handle;
     char errbuf[PCAP_ERRBUF_SIZE];
-    char *filename = "test.pcap"; 
+    char *filename = "test1.pcap"; 
 
     // 프로그램 시작 시 리포트 파일 초기화
     FILE *fp = fopen("report.txt", "w");
@@ -231,5 +236,3 @@ int main() {
 
 // gcc main.c -o main -lpcap (컴파일)
 // ./main(실행)
-
-//Data Transferred, Avg RTT, Retransmissions 계산코드작성해야함
