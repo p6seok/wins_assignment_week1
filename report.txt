@@ -1,181 +1,133 @@
 ===== Session Summary =====
-Session: 192.168.0.8:52423 <-> 172.217.25.163:443
-Total Packets: 5
+Session: 192.168.0.8:55512 <-> 172.217.25.163:80
+Total Packets: 10
 Data Transferred: 0.00 MB
-Avg RTT: 25.4760 ms
+Avg RTT: 30.6450 ms
 Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 192.168.0.8:52421 <-> 121.53.204.130:443
-Total Packets: 25
-Data Transferred: 0.01 MB
-Avg RTT: 8.1920 ms
+Session: 192.168.0.8:55511 <-> 172.217.25.170:443
+Total Packets: 64
+Data Transferred: 0.04 MB
+Avg RTT: 26.4980 ms
 Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 192.168.0.8:52420 <-> 211.249.219.20:443
-Total Packets: 21
-Data Transferred: 0.01 MB
-Avg RTT: 6.8960 ms
-Retransmissions: 0
-===========================
-
-===== Session Summary =====
-Session: 192.168.0.8:52266 <-> 142.250.207.106:443
-Total Packets: 12
+Session: 192.168.0.8:55510 <-> 23.36.55.181:80
+Total Packets: 10
 Data Transferred: 0.00 MB
-Avg RTT: 0.0000 ms
+Avg RTT: 8.4440 ms
 Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 192.168.0.8:52419 <-> 211.231.116.87:443
-Total Packets: 25
-Data Transferred: 0.01 MB
-Avg RTT: 7.8610 ms
-Retransmissions: 0
-===========================
-
-===== Session Summary =====
-Session: 192.168.0.8:52265 <-> 142.250.207.98:443
-Total Packets: 11
-Data Transferred: 0.00 MB
-Avg RTT: 0.0000 ms
-Retransmissions: 0
-===========================
-
-===== Session Summary =====
-Session: 192.168.0.8:52262 <-> 142.250.76.129:443
-Total Packets: 12
-Data Transferred: 0.00 MB
-Avg RTT: 0.0000 ms
-Retransmissions: 0
-===========================
-
-===== Session Summary =====
-Session: 192.168.0.8:52261 <-> 142.250.207.110:443
-Total Packets: 13
-Data Transferred: 0.00 MB
-Avg RTT: 0.0000 ms
-Retransmissions: 0
-===========================
-
-===== Session Summary =====
-Session: 192.168.0.8:52417 <-> 35.186.224.24:443
+Session: 192.168.0.8:55509 <-> 211.56.99.216:443
 Total Packets: 22
 Data Transferred: 0.01 MB
-Avg RTT: 8.2330 ms
+Avg RTT: 8.0230 ms
 Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 192.168.0.8:52259 <-> 142.250.207.100:443
-Total Packets: 369
-Data Transferred: 0.28 MB
-Avg RTT: 0.0000 ms
+Session: 192.168.0.8:55508 <-> 23.36.55.181:80
+Total Packets: 10
+Data Transferred: 0.00 MB
+Avg RTT: 7.4870 ms
 Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 192.168.0.8:52415 <-> 121.53.85.3:443
-Total Packets: 26
+Session: 192.168.0.8:55507 <-> 23.36.55.181:80
+Total Packets: 10
+Data Transferred: 0.00 MB
+Avg RTT: 7.3470 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:55506 <-> 23.36.55.181:80
+Total Packets: 10
+Data Transferred: 0.00 MB
+Avg RTT: 8.2290 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:55505 <-> 211.183.209.23:443
+Total Packets: 22
 Data Transferred: 0.01 MB
-Avg RTT: 9.5180 ms
+Avg RTT: 9.6780 ms
 Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 192.168.0.8:52414 <-> 211.231.116.87:443
-Total Packets: 36
+Session: 192.168.0.8:55504 <-> 211.56.99.216:443
+Total Packets: 21
 Data Transferred: 0.01 MB
-Avg RTT: 8.4100 ms
+Avg RTT: 9.2710 ms
 Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 192.168.0.8:52413 <-> 121.53.108.35:443
+Session: 192.168.0.8:55503 <-> 121.53.108.35:443
 Total Packets: 20
 Data Transferred: 0.01 MB
-Avg RTT: 9.1380 ms
+Avg RTT: 10.4970 ms
 Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 192.168.0.8:52412 <-> 20.200.245.247:443
+Session: 192.168.0.8:55502 <-> 20.200.245.247:443
 Total Packets: 25
 Data Transferred: 0.01 MB
-Avg RTT: 11.0190 ms
+Avg RTT: 10.6230 ms
 Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 192.168.0.8:52410 <-> 20.200.245.247:443
-Total Packets: 31
-Data Transferred: 0.01 MB
-Avg RTT: 9.1580 ms
-Retransmissions: 0
-===========================
-
-===== Session Summary =====
-Session: 192.168.0.8:52409 <-> 20.200.245.245:443
-Total Packets: 17
-Data Transferred: 0.01 MB
-Avg RTT: 9.2150 ms
-Retransmissions: 0
-===========================
-
-===== Session Summary =====
-Session: 192.168.0.8:52408 <-> 121.53.204.130:443
-Total Packets: 83
-Data Transferred: 0.06 MB
-Avg RTT: 8.6330 ms
-Retransmissions: 0
-===========================
-
-===== Session Summary =====
-Session: 192.168.0.8:52407 <-> 140.82.114.26:443
-Total Packets: 18
-Data Transferred: 0.01 MB
-Avg RTT: 195.6490 ms
-Retransmissions: 0
-===========================
-
-===== Session Summary =====
-Session: 192.168.0.8:51355 <-> 140.82.113.26:443
-Total Packets: 8
-Data Transferred: 0.00 MB
-Avg RTT: 0.0000 ms
-Retransmissions: 0
-===========================
-
-===== Session Summary =====
-Session: 192.168.0.8:62992 <-> 172.64.148.235:443
-Total Packets: 4
-Data Transferred: 0.00 MB
-Avg RTT: 0.0000 ms
-Retransmissions: 0
-===========================
-
-===== Session Summary =====
-Session: 192.168.0.8:52352 <-> 20.200.245.247:443
-Total Packets: 114
-Data Transferred: 0.11 MB
-Avg RTT: 0.0000 ms
+Session: 192.168.0.8:55499 <-> 121.53.204.130:443
+Total Packets: 63
+Data Transferred: 0.05 MB
+Avg RTT: 8.6640 ms
 Retransmissions: 1
 ===========================
 
 ===== Session Summary =====
-Session: 192.168.0.8:52404 <-> 13.89.179.8:443
-Total Packets: 35
+Session: 192.168.0.8:55497 <-> 54.186.23.98:443
+Total Packets: 21
 Data Transferred: 0.01 MB
-Avg RTT: 168.4580 ms
+Avg RTT: 131.3400 ms
 Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 208.103.161.1:443 <-> 192.168.0.8:59735
+Session: 192.168.0.8:55496 <-> 20.50.73.4:443
+Total Packets: 28
+Data Transferred: 0.01 MB
+Avg RTT: 308.3550 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:52741 <-> 34.110.164.207:443
+Total Packets: 2
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:55488 <-> 20.42.73.25:443
+Total Packets: 28
+Data Transferred: 0.01 MB
+Avg RTT: 197.9220 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:52769 <-> 35.186.224.40:443
 Total Packets: 4
 Data Transferred: 0.00 MB
 Avg RTT: 0.0000 ms
@@ -183,7 +135,7 @@ Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 208.103.161.1:443 <-> 192.168.0.8:59739
+Session: 192.168.0.8:52755 <-> 35.186.224.40:443
 Total Packets: 4
 Data Transferred: 0.00 MB
 Avg RTT: 0.0000 ms
@@ -191,8 +143,136 @@ Retransmissions: 0
 ===========================
 
 ===== Session Summary =====
-Session: 192.168.0.8:52255 <-> 18.244.60.55:443
-Total Packets: 9
+Session: 192.168.0.8:52746 <-> 35.186.224.24:443
+Total Packets: 2
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:54394 <-> 160.79.104.10:443
+Total Packets: 287
+Data Transferred: 0.05 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 2
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:52770 <-> 35.186.224.22:443
+Total Packets: 12
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 172.64.148.235:443 <-> 192.168.0.8:52817
+Total Packets: 16
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:52781 <-> 134.224.4.138:443
+Total Packets: 5
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:60478 <-> 17.57.12.16:443
+Total Packets: 22
+Data Transferred: 0.00 MB
+Avg RTT: 156.6550 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 170.114.52.34:443 <-> 192.168.0.8:53500
+Total Packets: 4
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 208.103.161.2:443 <-> 192.168.0.8:54604
+Total Packets: 12
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:52778 <-> 208.103.161.1:443
+Total Packets: 2
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 104.199.241.202:4070 <-> 192.168.0.8:52783
+Total Packets: 2
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:55463 <-> 20.50.73.4:443
+Total Packets: 23
+Data Transferred: 0.01 MB
+Avg RTT: 252.9790 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:55228 <-> 52.182.143.213:443
+Total Packets: 12
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:52805 <-> 162.159.133.234:443
+Total Packets: 4
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 208.103.161.2:443 <-> 192.168.0.8:52857
+Total Packets: 12
+Data Transferred: 0.00 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:52813 <-> 162.159.137.232:443
+Total Packets: 73
+Data Transferred: 0.01 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 192.168.0.8:52820 <-> 162.159.128.233:443
+Total Packets: 33
+Data Transferred: 0.02 MB
+Avg RTT: 0.0000 ms
+Retransmissions: 0
+===========================
+
+===== Session Summary =====
+Session: 170.114.1.177:443 <-> 192.168.0.8:52788
+Total Packets: 5
 Data Transferred: 0.00 MB
 Avg RTT: 0.0000 ms
 Retransmissions: 0
