@@ -20,6 +20,16 @@ struct tcp_session {
     struct timeval syn_time;
     int handshake_state;
 
+    // RTT 계산용
+    double connection_rtt; // 연결수립 RTT
+    double data_rtt_sum; //데이터 RTT합
+    int data_rtt_count; // 데이터 RTT측정횟수
+
+    // 데이터 RTT 측정용
+    uint32_t pending_seq[100]; // 전송 대기중인 SEQ 번호들
+    struct timeval seq_times[100]; // 각 SEQ의 전송 시간
+    int pending_count; // 대기중인 SEQ개수
+
     // 재전송 탐지를 위한 SEQ 번호 저장
     uint32_t seen_seq_numbers[2048];
     int seq_count;

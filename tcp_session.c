@@ -43,6 +43,12 @@ struct tcp_session* find_or_create_session(const char *src_ip, unsigned short sr
     new_session->retransmissions = 0;
     timerclear(&new_session->syn_time);
     new_session->handshake_state = 0;
+
+    new_session->connection_rtt = 0.0;
+    new_session->data_rtt_sum = 0.0;
+    new_session->data_rtt_count = 0;
+    new_session->pending_count = 0;
+
     new_session->seq_count = 0;
     timerclear(&new_session->throughput_start_time);
     new_session->bytes_in_interval = 0;
