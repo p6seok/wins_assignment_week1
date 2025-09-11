@@ -28,7 +28,7 @@ void calculate_rtt_with_payload(struct tcp_session* session, const struct pcap_p
                 (pkthdr->ts.tv_usec - session->syn_time.tv_usec);
 
             session->connection_rtt = (double)rtt_us / 1000.0; // ms로 변환
-            session->handshake_state = 2; // 핸드셰이크 완료
+            session->handshake_state = 2; // SYN/ACk 받음, RTT계산완료
 
             printf("> Connection RTT: %.2f ms\n", session->connection_rtt);
 
