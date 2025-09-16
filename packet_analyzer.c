@@ -28,7 +28,11 @@ void calculate_rtt_with_payload(struct tcp_session* session, const struct pcap_p
                 (pkthdr->ts.tv_usec - session->syn_time.tv_usec);
 
             session->connection_rtt = (double)rtt_us / 1000.0; // ms로 변환
+<<<<<<< HEAD
             session->handshake_state = 2; // SYN/ACk 받음, RTT계산완료
+=======
+            session->handshake_state = 2; // SYN/ACK 받음, RTT계산완료
+>>>>>>> 75f9504 (Fix: 데이터 전송 RTT 측정 로직 수정)
 
             printf("> Connection RTT: %.2f ms\n", session->connection_rtt);
 
@@ -42,46 +46,56 @@ void calculate_rtt_with_payload(struct tcp_session* session, const struct pcap_p
         uint32_t seq_num = ntohl(tcp_header->th_seq);
         uint32_t ack_num = ntohl(tcp_header->th_ack);
 
-        // 데이터를 포함한 패킷 (SEQ 추적 시작)
-        if (tcp_payload_len > 0 && !(tcp_header->th_flags & TH_ACK)) {
-            // SEQ 번호와 시간을 저장 (배열이 가득 차지 않았을때)
-            if (session->pending_count < 100) {
-                session->pending_seq[session->pending_count] = seq_num;
-                session->seq_times[session->pending_count] = pkthdr->ts;
-                session->pending_count++;
+        // 데이터를 포함한 패킷 추적 (방향성 체크 추가)
+        if (tcp_payload_len > 0) {
+            // 세션의 원래 방향(src->dst)으로 보내는 데이터 패킷만 추적
+            if (strcmp(session->src_ip_str, src_ip) == 0) {
+                // 이 데이터에 대한 예상 ACK 번호 계산
+                uint32_t expected_ack = seq_num + tcp_payload_len;
+                
+                // 배열이 가득 차지 않았을때만 저장
+                if (session->pending_count < 100) {
+                    session->pending_seq[session->pending_count] = expected_ack;
+                    session->seq_times[session->pending_count] = pkthdr->ts;
+                    session->pending_count++;
 
-                printf("DEBUG: Data packet SEQ %u tracked\n", seq_num);
+                    printf("DEBUG: Outgoing data packet tracked. SEQ=%u, expecting ACK=%u\n", 
+                           seq_num, expected_ack);
+                }
             }
         }
 
-        // ACK 패킷 (대응하는 SEQ 찾아서 RTT 계산)
+        // 들어오는 ACK 패킷에서 RTT 계산
         if (tcp_header->th_flags & TH_ACK) {
-            for (int i = 0; i < session->pending_count; i++) {
-                // ACK 번호가 저장된 SEQ + 데이터 길이와 일치하는지 확인
-                if (ack_num > session->pending_seq[i]) {
-                    // 데이터 RTT 계산
-                    long data_rtt_us = (pkthdr->ts.tv_sec - session->seq_times[i].tv_sec) * 1000000 +
-                        (pkthdr->ts.tv_usec - session->seq_times[i].tv_usec);
+            // 반대 방향에서 온 패킷인지 확인
+            if (strcmp(session->dst_ip_str, src_ip) == 0) {
+                for (int i = 0; i < session->pending_count; i++) {
+                    // ACK 번호가 우리가 기다리던 번호와 일치하는지 확인
+                    if (ack_num >= session->pending_seq[i]) {
+                        // 데이터 RTT 계산
+                        long data_rtt_us = (pkthdr->ts.tv_sec - session->seq_times[i].tv_sec) * 1000000 +
+                            (pkthdr->ts.tv_usec - session->seq_times[i].tv_usec);
 
-                    double data_rtt_ms = (double)data_rtt_us / 1000.0;
+                        double data_rtt_ms = (double)data_rtt_us / 1000.0;
 
-                    // 데이터 RTT 누적
-                    session->data_rtt_sum += data_rtt_ms;
-                    session->data_rtt_count++;
+                        // 데이터 RTT 누적
+                        session->data_rtt_sum += data_rtt_ms;
+                        session->data_rtt_count++;
 
-                    printf("DEBUG: Data RTT calculated: %.2f ms (SEQ %u -> ACK %u)\n",
-                        data_rtt_ms, session->pending_seq[i], ack_num);
+                        printf("DEBUG: Data RTT calculated: %.2f ms (expected ACK %u, received ACK %u)\n",
+                            data_rtt_ms, session->pending_seq[i], ack_num);
 
-                    // 처리된 SEQ 제거 (배열에서 삭제)
-                    for (int j = i; j < session->pending_count - 1; j++) {
-                        session->pending_seq[j] = session->pending_seq[j + 1];
-                        session->seq_times[j] = session->seq_times[j + 1];
+                        // 처리된 항목 제거 (배열에서 삭제)
+                        for (int j = i; j < session->pending_count - 1; j++) {
+                            session->pending_seq[j] = session->pending_seq[j + 1];
+                            session->seq_times[j] = session->seq_times[j + 1];
+                        }
+                        session->pending_count--;
+
+                        // 최종 평균 RTT 업데이트
+                        update_avg_rtt(session);
+                        break;
                     }
-                    session->pending_count--;
-
-                    // 최종 평균 RTT 업데이트
-                    update_avg_rtt(session);
-                    break;
                 }
             }
         }
@@ -216,7 +230,7 @@ void packet_handler(u_char* args, const struct pcap_pkthdr* pkthdr, const u_char
     // 세션 통계 업데이트
     update_session_stats(session, packet_size);
 
-    // RTT 계산 (tcp_payload_len도 함께 전달)
+    // RTT 계산 (기존 매개변수 유지)
     calculate_rtt_with_payload(session, pkthdr, tcp_header, src_ip_buf, tcp_payload_len);
 
     // 재전송 탐지
